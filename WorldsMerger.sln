@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldsMerger", "WorldsMerger\WorldsMerger.csproj", "{9DF3F28F-2E7D-434E-ABCF-6942B8243B23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DF3F28F-2E7D-434E-ABCF-6942B8243B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DF3F28F-2E7D-434E-ABCF-6942B8243B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DF3F28F-2E7D-434E-ABCF-6942B8243B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DF3F28F-2E7D-434E-ABCF-6942B8243B23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
