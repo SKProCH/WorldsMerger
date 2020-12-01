@@ -3,14 +3,26 @@
         xmlns:vm="clr-namespace:WorldsMergerGui.ViewModels;assembly=WorldsMergerGui"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WorldsMergerGui.Views.MainWindow"
         Title="WorldsMergerGui">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    <DockPanel>
+        <styles:Card Margin="16" DockPanel.Dock="Top">
+            <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto, Auto, Auto">
+                <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding OldLevelData}"/>
+                <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding NewLevelData}"/>
+                <TextBox Grid.Column="0" Grid.Row="2" Text="{Binding PlayerData}"/>
+                <TextBox Grid.Column="0" Grid.Row="3" Text="{Binding OutputPath}"/>
+                <Button Grid.Column="1" Grid.Row="0" CommandParameter="{Binding $parent[Window]}" Command="{Binding BrowseOldLevelData}">Browse</Button>
+                <Button Grid.Column="1" Grid.Row="1" CommandParameter="{Binding $parent[Window]}" Command="{Binding BrowseNewLevelData}">Browse</Button>
+                <Button Grid.Column="1" Grid.Row="2" CommandParameter="{Binding $parent[Window]}" Command="{Binding BrowsePlayerData}">Browse</Button>
+                <Button Grid.Column="1" Grid.Row="3" CommandParameter="{Binding $parent[Window]}" Command="{Binding BrowseOutputPath}">Browse</Button>
+            </Grid>
+        </styles:Card>
+    </DockPanel>
 </Window>

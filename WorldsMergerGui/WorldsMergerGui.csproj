@@ -14,9 +14,10 @@
         <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.9.12" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
+        <PackageReference Include="Avalonia" Version="0.10.0-preview6" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview6" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview6" />
+        <PackageReference Include="Material.Avalonia" Version="0.10.4" />
     </ItemGroup>
     <ItemGroup>
       <UpToDateCheckInput Remove="Assets\avalonia-logo.ico" />
