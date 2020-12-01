@@ -2,28 +2,67 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CommandLine;
 using fNbt;
 
 namespace WorldsMergerCli {
     class Program {
         static void Main(string[] args) {
-            Console.Write("Путь к файлу игрока: ");
-            var filePath = Path.GetFullPath(Console.ReadLine());
-            var main = new NbtFile(filePath);
-            Console.Write("Путь к старому level.dat: ");
-            var oldMappings = GetMappings(Console.ReadLine());
-            Console.Write("Путь к новому level.dat: ");
-            var newMappings = GetMappings(Console.ReadLine());
-            Process(main.RootTag, oldMappings, newMappings);
-            var patchedPath = Path.Combine(Path.GetDirectoryName(filePath), $"{Path.GetFileNameWithoutExtension(filePath)}_patched{Path.GetExtension(filePath)}");
-            main.SaveToFile(patchedPath, main.FileCompression);
-            Console.WriteLine($"Файл сохранен - {patchedPath}");
-
-            Console.ReadKey();
+            Parser.Default.ParseArguments<CmdOptions>(args)
+                  .WithParsed(RunOptions)
+                  .WithNotParsed(HandleParseError);
         }
-        
+
+        private static void HandleParseError(IEnumerable<Error> obj) {
+            Console.WriteLine("Arguments parse failed:");
+            foreach (var error in obj) {
+                Console.WriteLine(error.Tag);
+            }
+
+            Environment.Exit(-1);
+        }
+
+        private static void RunOptions(CmdOptions obj) {
+            if (obj.OldLevelDat == null) {
+                Console.WriteLine("Enter path to old level.dat");
+                obj.OldLevelDat = Console.ReadLine();
+            }
+
+            if (obj.NewLevelDat == null) {
+                Console.WriteLine("Enter path to new level.dat");
+                obj.NewLevelDat = Console.ReadLine();
+            }
+
+            if (obj.PlayerData == null) {
+                Console.WriteLine("Enter path to player data file");
+                obj.PlayerData = Console.ReadLine();
+            }
+
+            if (obj.OutputPath == null) {
+                obj.OutputPath = Path.Combine(Path.GetDirectoryName(obj.PlayerData),
+                    $"{Path.GetFileNameWithoutExtension(obj.PlayerData)}_patched{Path.GetExtension(obj.PlayerData)}");
+            }
+
+            obj.PlayerData = Path.GetFullPath(obj.PlayerData);
+            obj.OutputPath = Path.GetFullPath(obj.OutputPath);
+            obj.NewLevelDat = Path.GetFullPath(obj.NewLevelDat);
+            obj.OldLevelDat = Path.GetFullPath(obj.OldLevelDat);
+
+            Run(obj);
+        }
+
+        private static void Run(CmdOptions cmdOptions) {
+            var main = new NbtFile(cmdOptions.PlayerData);
+            var oldMappings = GetMappings(cmdOptions.OldLevelDat);
+            var newMappings = GetMappings(cmdOptions.NewLevelDat);
+            Process(main.RootTag, oldMappings, newMappings);
+
+            main.SaveToFile(cmdOptions.OutputPath, main.FileCompression);
+            Console.WriteLine($"File saved to {cmdOptions.OutputPath}");
+        }
+
         public static Dictionary<string, short> GetMappings(string fileName) {
-            Console.WriteLine($"Создание маппингов из файла - {fileName}");
+            Console.WriteLine($"Creating mappings from file - {fileName}");
             var mappings = new NbtFile(fileName);
             var dictionary = new Dictionary<string, short>();
             foreach (var tag in (mappings.RootTag["FML"]["ItemData"] as NbtList)) {
