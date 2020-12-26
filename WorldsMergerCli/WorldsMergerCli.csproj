@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\fNbt\fNbt.csproj" />
+      <ProjectReference Include="..\WorldsMerger\WorldsMerger.csproj" />
     </ItemGroup>
 
     <ItemGroup>

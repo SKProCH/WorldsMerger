@@ -27,6 +27,6 @@
       <UpToDateCheckInput Remove="Assets\avalonia-logo.ico" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\WorldsMergerCli\WorldsMergerCli.csproj" />
+      <ProjectReference Include="..\WorldsMerger\WorldsMerger.csproj" />
     </ItemGroup>
 </Project>
