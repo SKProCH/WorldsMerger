@@ -10,12 +10,18 @@ namespace WorldsMergerCli {
             logger?.Log(LogLevel.Information, $"Creating mappings from file - {fileName}");
             var mappings = new NbtFile(fileName);
             var dictionary = new Dictionary<string, short>();
-            foreach (var tag in (mappings.RootTag["FML"]["ItemData"] as NbtList)) {
+            var mappingCount = (mappings.RootTag["FML"]["ItemData"] as NbtList).Count;
+            for (var index = 0; index < mappingCount; index++) {
+                var tag = (mappings.RootTag["FML"]["ItemData"] as NbtList)[index];
                 try {
                     dictionary.Add((tag as NbtCompound)["K"].StringValue.Substring(1), (short) (tag as NbtCompound)["V"].IntValue);
                 }
                 catch (Exception) {
                     // ignored
+                }
+
+                if (index % 500 == 0) {
+                    logger?.Log(LogLevel.Information, $"Completed {(int)(index / (double)mappingCount * 100)}%: {index} of {mappingCount}");
                 }
             }
 
