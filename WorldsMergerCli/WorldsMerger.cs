@@ -42,10 +42,11 @@ namespace WorldsMergerCli {
                         try {
                             var stringId = oldMappings.First(pair => pair.Value == id.ShortValue).Key;
                             try {
+                                var oldValue = id.Value;
                                 var newId = newMappings[stringId];
                                 nbtCompound.Remove(id);
                                 nbtCompound.Add(new NbtShort("id", newId));
-                                logger?.Log(LogLevel.Information, $"Processed {stringId}");
+                                logger?.Log(LogLevel.Information, $"Processed {stringId}: {oldValue} -> {newId}");
                             }
                             catch (Exception) {
                                 logger?.Log(LogLevel.Warning, $"Tag {stringId} not exists in dictionary");
@@ -57,14 +58,14 @@ namespace WorldsMergerCli {
                     }
 
                     foreach (var variable in nbtCompound) {
-                        Process(variable, oldMappings, newMappings, logger);
+                        ProcessInternal(variable, oldMappings, newMappings, logger);
                     }
 
                     break;
                 }
                 case NbtList nbtList: {
                     foreach (var variable in nbtList) {
-                        Process(variable, oldMappings, newMappings, logger);
+                        ProcessInternal(variable, oldMappings, newMappings, logger);
                     }
 
                     break;
