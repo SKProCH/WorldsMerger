@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
+        xmlns:avaloniaEdit="https://github.com/avaloniaui/avaloniaedit"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WorldsMergerGui.Views.MainWindow"
         Title="WorldsMergerGui">
@@ -25,13 +26,13 @@
             </Grid>
         </styles:Card>
         <Button DockPanel.Dock="Bottom" Margin="16" HorizontalAlignment="Right"
-                Command="{Binding RunCommand}">Run</Button>
+                Command="{Binding RunCommand}" CommandParameter="{Binding #TextEditor}">Run</Button>
         <styles:Card Margin="16 0 16 0">
             <DockPanel>
                 <styles:ColorZone Mode="PrimaryMid" Padding="16" DockPanel.Dock="Top">
                     <TextBlock FontSize="24">Log</TextBlock>
                 </styles:ColorZone>
-                <TextBlock Margin="16" Text="{Binding LogText}"></TextBlock>
+                <avaloniaEdit:TextEditor Name="TextEditor" IsReadOnly="True" Margin="16" Document="{Binding LogText}"></avaloniaEdit:TextEditor>
             </DockPanel>
         </styles:Card>
     </DockPanel>
