@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
         <Folder Include="Models\" />
@@ -14,13 +14,13 @@
         <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
-        <PackageReference Include="Avalonia.AvaloniaEdit" Version="0.10.0-rc1" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.0-rc1" />
-        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0-rc1" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-rc1" />
-        <PackageReference Include="Material.Avalonia" Version="0.10.4" />
-        <PackageReference Include="ReactiveUI.Fody" Version="12.1.5" />
+        <PackageReference Include="Avalonia" Version="0.10.13" />
+        <PackageReference Include="Avalonia.AvaloniaEdit" Version="0.10.12.2" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.13" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.13" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.13" />
+        <PackageReference Include="Material.Avalonia" Version="3.0.0-rc0.90-nightly" />
+        <PackageReference Include="ReactiveUI.Fody" Version="18.0.10" />
         <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
     <ItemGroup>
